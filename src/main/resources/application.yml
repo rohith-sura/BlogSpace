@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: BlogSpace
+    name: springboot-blogspace
   datasource:
     url: ${aws_postgres_url}
     username: ${aws_postgres_username}
