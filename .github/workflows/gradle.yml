@@ -45,7 +45,7 @@ jobs:
       with:
         image: surarohith/springboot-blogspace
         tags:
-          ${{ version }}
+          ${{ steps.version-tag.outputs.version }}
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
