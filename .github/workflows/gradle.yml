@@ -35,17 +35,17 @@ jobs:
     - name: Calculate the version tag
       id: version-tag
       run: |
-        CURRENT_DATE_TIME="blogspace-$(date +'%m%d%Y-%H%M%S')"
+        CURRENT_DATE_TIME="blogspace-$(date +'%Y.%m.%d-%H.%M.%S')"
         COMMIT_NUMBER=${{ github.run_number }}
         VERSION_TAG="${CURRENT_DATE_TIME}-${COMMIT_NUMBER}"
-        echo "Version tag: $VERSION_TAG"
-        echo "::set-output name=version::${VERSION_TAG}"
+    - name: Tag version
+      run: echo "version=${VERSION_TAG}" >> $GITHUB_OUTPUT
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
         image: surarohith/springboot-blogspace
         tags:
-          ${{ steps.version-tag.outputs.version }}
+          ${{ version }}
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
