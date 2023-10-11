@@ -32,14 +32,15 @@ jobs:
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
       with:
         arguments: build
+
     - name: Calculate the version tag
       id: version-tag
       run: |
         CURRENT_DATE_TIME="blogspace-$(date +'%Y.%m.%d-%H.%M.%S')"
         COMMIT_NUMBER=${{ github.run_number }}
         VERSION_TAG="${CURRENT_DATE_TIME}-${COMMIT_NUMBER}"
-    - name: Tag version
-      run: echo "version=${VERSION_TAG}" >> $GITHUB_OUTPUT
+        echo "version=${VERSION_TAG}" >> $GITHUB_OUTPUT
+
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
