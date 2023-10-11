@@ -11,6 +11,6 @@ public class BlogController {
     @GetMapping("/sample")
     public String sample()
     {
-        return "Hello";
+        return "Hello.....its working!!!!!";
     }
 }
