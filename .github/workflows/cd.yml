@@ -1,0 +1,18 @@
+name: BlogSpace CD Runner
+
+on:
+  workflow_run:
+    workflows: [ "CD Pipeline" ]
+    types:
+      - completed
+      -
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - name: Pull the Docker image
+      run: sudo docker pull surarohith/springboot-blogspace:blogspace-2023.10.11-12.33.20AM-23
+    - name: Run Docker Container
+      uses: sudo docker run -d -p 9091:9091 -e aws_postgres_password=postgres -e aws_postgres_url=jdbc:postgresql://rohithsura-blogspace.cmcygazoi7vm.us-east-2.rds.amazonaws.com:5432/postgres -e aws_postgres_username=postgres surarohith/springboot-blogspace:blogspace-2023.10.11-12.33.20AM-23
